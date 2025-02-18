@@ -57,5 +57,5 @@ app.use('/api', get_locations);
 // HTTPSサーバーの起動
 const PORT = 3000;
 https.createServer(credentials, app).listen(PORT, '0.0.0.0', () => {
-  console.log(`サーバーが https://3.239.66.141:${PORT} で起動しました`);
+  console.log(`サーバーが https://13.216.172.169:${PORT} で起動しました`);
 });
