@@ -9,9 +9,9 @@ const multer = require('multer');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const directoryMap = {
-            'mdlimage': '/home/ec2-user/Tabitomo-AR2/AR_app/public/Content/.glb',
-            'patt': '/home/ec2-user/Tabitomo-AR2/AR_app/public/Content/.patt',
-            'mkimage': '/home/ec2-user/Tabitomo-AR2/AR_app/public/Content/markerimage'
+            'mdlimage': '/home/ec2-user/Tabitomo-AR3/AR_app/public/Content/.glb',
+            'patt': '/home/ec2-user/Tabitomo-AR3/AR_app/public/Content/.patt',
+            'mkimage': '/home/ec2-user/Tabitomo-AR3/AR_app/public/Content/markerimage'
             };
         cb(null, directoryMap[file.fieldname] || 'default/path');
     },

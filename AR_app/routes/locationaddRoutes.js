@@ -10,11 +10,11 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // フィールド名に応じたアップロード先ディレクトリのマッピング
     const directoryMap = {
-      'mdlimage': '/home/ec2-user/Tabitomo-AR2/AR_app/public/Content/.glb',
-      'patt': '/home/ec2-user/Tabitomo-AR2/AR_app/public/Content/.patt',
-      'mkimage': '/home/ec2-user/Tabitomo-AR2/AR_app/public/Content/markerimage',
-      'sound': '/home/ec2-user/Tabitomo-AR2/AR_app/public/Content/sound',
-      'subtitles': '/home/ec2-user/Tabitomo-AR2/AR_app/public/Content/napisy'
+      'mdlimage': '/home/ec2-user/Tabitomo-AR3/AR_app/public/Content/.glb',
+      'patt': '/home/ec2-user/Tabitomo-AR3/AR_app/public/Content/.patt',
+      'mkimage': '/home/ec2-user/Tabitomo-AR3/AR_app/public/Content/markerimage',
+      'sound': '/home/ec2-user/Tabitomo-AR3/AR_app/public/Content/sound',
+      'subtitles': '/home/ec2-user/Tabitomo-AR3/AR_app/public/Content/napisy'
     };
     // マッピングされたディレクトリを使用。デフォルトは 'default/path'
     cb(null, directoryMap[file.fieldname] || 'default/path');
