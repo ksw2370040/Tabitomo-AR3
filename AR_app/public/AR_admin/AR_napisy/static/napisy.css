@@ -1,0 +1,216 @@
+/* 基本設定 */
+* {
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+/* Header styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ededed;
+    padding: 10px 20px;
+    border-bottom: 2px solid #ffffff;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 70px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+header a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+header p {
+    font-size: 0.5em;
+    margin-right: 50px;
+}
+
+li {
+    list-style: none;
+}
+
+ul {
+    padding-left: 0;
+}
+
+/* メイン */
+
+main {
+    flex-grow: 1;
+    margin-top: 70px;
+}
+
+.napisylist {
+    margin-left: 250px;
+    margin-top: 30px;
+    width: 80%;
+    max-width: 800px;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+.napisylist-tab {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.napisylist-tab li {
+    flex: 1;
+    text-align: center;
+}
+
+.napisy {
+    list-style: none;
+    padding: 0;
+}
+
+.napisy li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.item {
+    flex: 1;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: normal;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+}
+
+
+.item:last-child {
+    border-right: none;
+}
+
+.napisytext button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: transparent;
+    color: #333;
+    border: none;
+    cursor: pointer;
+}
+
+.napisytext button:hover {
+    background-color: #ededed;
+    border-color: transparent;
+    color: rgb(32, 203, 143);
+}
+
+/* サイドバー */
+.sideber {
+    position: fixed;
+    left: 0;
+    width: 200px;
+    height: calc(100vh - 70px);
+    background-color: #ffffff;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #333;
+}
+
+/* サイドバー内のコンテンツ */
+.sideber-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 15px;
+}
+
+/* その他のスタイル */
+/* サイドバー内のリンクの基本スタイル */
+.sideber-container a {
+    width: 80%;
+    /* text-align: center; */
+    overflow: hidden;
+    background-color: #ffffff;
+    position: relative;
+    padding: 5px 0;
+    border-bottom: 1px solid #333;
+}
+
+.sideber-container button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    background-color: transparent;
+    color: #333;
+    border: none;
+    cursor: pointer;
+}
+
+.sideber-container a:hover {
+    background-color: #ededed;
+    border-color: transparent;
+}
+
+.sideber-container a:hover::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(82.3deg, rgb(110, 255, 183) 10.8%, rgb(0, 80, 172) 94.3%);
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.sideber-container a:hover button {
+    color: #000;
+}
+
+.container {
+    margin-top: 50px;
+    margin-left: 220px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.container a {
+    padding: 20px 20px 20px 20px;
+    border: 1px solid;
+    border-color: #333;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/home.css">
+    <title>ホーム</title>
+
+</head>
+
+<body>
+
+    <header>
+        <video id="header-video" autoplay loop muted>
+            <source src="rogo/op-4.mp4" type="video/mp4">
+        </video>
+        <h1>ホーム</h1>
+        <ul>
+            <li>
+                <p id="username-display">ユーザー名: </p>
+            </li>
+            <li>
+                <p><a href="logout.html">ログアウト</a></p>
+            </li>
+        </ul>
+    </header>
+
+    <div class="content">
+        <div class="button-container">
+            <a href="map.html" class="btn-square-toy">マップ</a>
+            <a id="ar-button" href="multi_AR.html" class="btn-square-toy">AR</a>
+            <a href="mypage/mypage.html" class="btn-square-toy">マイページ</a>
+        </div>
+    </div>
+    <footer>
+        <p>© 2024 たびとも</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 背景画像を表示するための要素を作成
+            const backgroundElement = document.createElement('div');
+            backgroundElement.id = 'background';
+            document.body.appendChild(backgroundElement);
+
+            // ローカルストレージからユーザー情報を取得
+            const username = localStorage.getItem('username');
+            const userid = localStorage.getItem('userid');
+            const languagename = localStorage.getItem('languagename');
+
+            // ユーザー名を表示
+            const headerP = document.getElementById("username-display");
+            if (username && headerP) {
+                headerP.textContent = `ユーザー名: ${username}`;
+            }
+
+            // ログインしていない場合、ログイン画面へリダイレクト
+            if (!username || !userid || !languagename) {
+                window.location.href = 'login.html';  // ログイン画面にリダイレクト
+            }
+
+            // ARボタンのURLに userid と languagename を追加
+            if (languagename && userid) {
+                const arButton = document.getElementById('ar-button');
+                if (arButton) {
+                    arButton.href = `multi_AR.html?userid=${encodeURIComponent(userid)}&languagename=${encodeURIComponent(languagename)}`;
+                }
+            }
+
+
+
+
+        });
+    </script>
+
+</body>
+
+</html>

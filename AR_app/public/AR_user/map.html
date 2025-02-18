@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>マップ管理</title>
+    <link rel="stylesheet" href="static/admin.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="static/map.css">
+
+</head>
+
+<body>
+    <main>
+        <div id="map"></div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // OSM マップを初期化（スマホ向けズーム設定）
+        const map = L.map('map', {
+            center: [35.820847, 140.138308],
+            zoom: 10,
+            tap: false, // スマホのタップバグ対策
+            gestureHandling: true // タッチ操作を有効化（拡張ライブラリが必要）
+        });
+
+        // OpenStreetMap タイルレイヤー
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        async function fetchMapData() {
+            try {
+                const response = await fetch('/api/get_locations');
+                const data = await response.json();
+
+                if (!Array.isArray(data) || data.length === 0) {
+                    console.warn('取得データが空です');
+                    return;
+                }
+
+                // すべてのマーカーを追加
+                data.forEach(location => {
+                    if (location.latitude && location.longitude) {
+                        const googleMapsURL = `https://www.google.com/maps?q=${encodeURIComponent(location.address)}`;
+
+                        L.marker([location.latitude, location.longitude])
+                            .addTo(map)
+                            .bindPopup(`
+                                <b><a href="${googleMapsURL}" target="_blank">${location.locationNAME}</a></b><br>
+                                ${location.address}
+                            `);
+                    } else {
+                        console.warn(`座標なし: ${location.address}`);
+                    }
+                });
+            } catch (error) {
+                console.error('地図データの取得に失敗しました:', error);
+            }
+        }
+
+        fetchMapData();
+    </script>
+
+</body>
+
+</html>

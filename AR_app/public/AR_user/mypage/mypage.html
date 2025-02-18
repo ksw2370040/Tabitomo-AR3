@@ -1,0 +1,86 @@
+<!-- // C:\\Tabitomo-AR\\AR_app\\public\\AR_user\\mypage\\mypage.html -->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/mypage.css">
+    <script src="../js/user.js"></script>
+    <title>マイページ</title>
+</head>
+
+<body>
+    <header>
+        <video id="header-video" autoplay loop muted>
+            <source src="../rogo/op-4.mp4" type="video/mp4">
+        </video>
+        <h1>ホーム</h1>
+        <ul>
+            <li>
+                <p id="username-display">ユーザー名: </p>
+            </li>
+            <li>
+                <p><a href="../logout.html">ログアウト</a></p>
+            </li>
+        </ul>
+    </header>
+    <div class="content">
+        <div class="button-container">
+            <a href="language.html" class="btn-square-toy">言語変更</a>
+            <a href="rename.html" class="btn-square-toy">名前変更</a>
+            <a href="changepassword.html" class="btn-square-toy">パスワード変更</a>
+            <a href="" class="btn-square-toy" id="delete-account">アカウント削除</a>
+            <a href="collection.html" class="btn-square-toy">コレクション</a>
+        </div>
+        <a href="../home.html" class="back-button">戻る</a>
+    </div>
+    <footer>
+        <p>© 2024 たびとも</p>
+    </footer>
+</body>
+<script>
+    // URLパラメータまたはローカルストレージからusernameを取得
+    const urlParams2 = new URLSearchParams(window.location.search);
+    let username = urlParams2.get('username');
+
+    if (username) {
+        localStorage.setItem('username', username);
+    } else {
+        username = localStorage.getItem('username');
+    }
+
+    if (username) {
+        document.querySelector('header p').textContent = `ユーザー名: ${username}`;
+    }
+    // ログインしていない場合、ログイン画面へリダイレクト
+    if (!username) {
+        window.location.href = '../login.html';  // ログイン画面にリダイレクト
+    }
+    // アカウント削除ボタン処理
+    document.getElementById('delete-account').addEventListener('click', async () => {
+        if (confirm('本当にアカウントを削除しますか？')) {
+            try {
+                const response = await fetch('/api/deleteaccount', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username })
+                });
+
+                const data = await response.json();
+                if (data.status === 'success') {
+                    alert('アカウントが削除されました');
+                    localStorage.removeItem('username');
+                    window.location.href = '../login.html';
+                } else {
+                    alert('削除に失敗しました: ' + data.message);
+                }
+            } catch (err) {
+                console.error('エラー:', err);
+                alert('サーバーエラーが発生しました');
+            }
+        }
+    });
+</script>
+
+</html>
