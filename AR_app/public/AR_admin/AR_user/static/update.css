@@ -57,13 +57,6 @@ ul {
     padding-left: 0;
 }
 
-/* メイン */
-
-main {
-    flex-grow: 1;
-    margin-top: 70px;
-}
-
 /* サイドバー */
 .sideber {
     position: fixed;
@@ -101,14 +94,13 @@ main {
 .sideber-container button {
     width: 100%;
     padding: 10px;
-    font-size: 14px;
-    background-color: #ffffff;
+    font-size: 16px;
+    background-color: transparent;
     color: #333;
     border: none;
     cursor: pointer;
 }
 
-/* リンク全体にホバーしたときのスタイル */
 .sideber-container a:hover {
     background-color: #ededed;
     border-color: transparent;
@@ -130,14 +122,12 @@ main {
     color: #000;
 }
 
-/* メインコンテンツ */
 .container {
-    margin-left: 200px;
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-left: 220px;
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* 2列 */
     gap: 15px;
 }
 
@@ -147,109 +137,71 @@ main {
     border-color: #333;
 }
 
-/* ボタン */
-.container a.btn_18 {
+/* メイン */
+
+main {
+    flex-grow: 1;
+    margin-top: 70px;
+}
+
+.userinfo {
+    margin-left: 250px;
+    margin-top: 30px;
+    width: 80%;
+    max-width: 800px;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+.userinfo label {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-right: 15px;
+    text-align: center;
     align-items: center;
+    justify-content: center;
+}
+
+.userinfo div {
+    display: flex;
+    align-items: center;
+}
+
+/* ボタン */
+.edit {
     position: relative;
-    overflow: hidden;
+    writing-mode: horizontal-tb;
+    text-align: center;
+    white-space: nowrap;
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
     text-decoration: none;
-    height: 4rem;
-    width: 500px;
-    margin: auto;
-    padding: 0 4rem;
-    border-radius: 100vw;
-    background: #ffffff;
-    background-size: 400%;
-    color: #000000;
+    border-bottom: 1px solid #333;
 }
 
-.container a.btn_18:hover::before {
-    transform: scaleX(1);
+.edit:hover {
+    background-color: #ededed;
+    border-color: transparent;
 }
 
-.container a.btn_18:hover {
-    color: #fff;
-}
-
-.container a.btn_18 span {
-    position: relative;
-    z-index: 1;
-}
-
-.container a.btn_18::before {
+.edit::after {
     content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: scaleX(0);
-    transform-origin: 0 50%;
+    display: block;
     width: 100%;
-    height: inherit;
-    border-radius: inherit;
-    background: linear-gradient(82.3deg,
-            rgb(110, 255, 183) 10.8%,
-            rgb(0, 80, 172) 94.3%);
-    transition: all 0.45s;
+    height: 2px;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    background: transparent;
 }
 
-/* レスポンシブデザイン（画面サイズに応じた調整） */
-
-/* 768px以下の画面 */
-@media screen and (max-width: 768px) {
-    header h1 {
-        font-size: 1.2em;
-    }
-
-    .sideber {
-        width: 150px;
-    }
-
-    .container {
-        margin-left: 170px;
-        /* サイドバーが縮小した分だけ調整 */
-        grid-template-columns: 1fr;
-        /* 1列にする */
-    }
-
-    .container a {
-        width: 100%;
-        padding: 15px;
-    }
-
-    .container a.btn_18 {
-        width: 300px;
-    }
-}
-
-/* 480px以下の画面 */
-@media screen and (max-width: 480px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .sideber {
-        width: 120px;
-        height: auto;
-        /* 高さを調整 */
-    }
-
-    .container {
-        margin-left: 140px;
-        /* サイドバーが縮小した分だけ調整 */
-        grid-template-columns: 1fr;
-        /* 1列にする */
-        padding: 10px;
-    }
-
-    .container a {
-        width: 100%;
-        padding: 10px;
-    }
-
-    .container a.btn_18 {
-        width: 250px;
-    }
+.edit:hover::after {
+    background: linear-gradient(82.3deg, rgb(110, 255, 183) 10.8%, rgb(0, 80, 172) 94.3%);
 }

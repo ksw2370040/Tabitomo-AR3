@@ -202,7 +202,6 @@ input[type='file'] {
 
 /* 保存 */
 .keep {
-    float: right;
     position: relative;
     writing-mode: horizontal-tb;
     text-align: center;

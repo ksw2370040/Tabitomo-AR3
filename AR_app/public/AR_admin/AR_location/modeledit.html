@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/locationdetail.css">
+    <link rel="stylesheet" href="static/modeledit.css">
+
     <title>モデル編集</title>
+    <link rel="stylesheet" href="static/modeledit.css">
 </head>
 
 <body>
@@ -15,32 +17,38 @@
         <input type="text" id="locationname" name="locationname" required><br>
 
         <label for="address">住所:</label>
-        <input type="text" id="address" name="address" required><br>
+        <input type="text" id="address" name="address"><br>
 
         <label for="mdlname">モデル名:</label>
-        <input type="text" id="mdlname" name="mdlname" required><br>
+        <input type="text" id="mdlname" name="mdlname"><br>
 
         <label for="mdlimage">モデル画像:</label>
         <input type="file" id="mdlimage" name="mdlimage" accept=".glb"><br>
         <span id="mdlimage-name"></span><br>
 
         <label for="mkname">マーカー名:</label>
-        <input type="text" id="mkname" name="mkname" required><br>
+        <input type="text" id="mkname" name="mkname"><br>
 
         <label for="patt">パターンファイル:</label>
         <input type="file" id="patt" name="patt" accept=".patt"><br>
         <span id="patt-name"></span><br>
 
-        <label for="mkimage">マーカー画像:</label>
-        <input type="file" id="mkimage" name="mkimage" accept="image/*"><br>
-        <span id="mkimage-name"></span><br>
+        <div class="mkinfo">
+            <label for="mkimage">マーカー画像</label>
+            <input type="file" id="mkimage" name="mkimage" accept="image/*"><br>
+        </div>
 
-        <button type="submit">更新</button>
+        <div class="mk">
+            <span id="mkimage-name"></span><br>
+        </div>
+
+        <button class="edit" type="submit">更新</button>
     </form>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const mdlid = urlParams.get('mdlid');
+        let adminname = urlParams.get('adminname');
 
         if (mdlid) {
             fetch(`/locationedit?mdlid=${mdlid}`)
@@ -52,14 +60,27 @@
                     document.getElementById('mkname').value = data.mkname;
 
                     // 既存のファイル名を表示
-                    document.getElementById('mdlimage-name').textContent = `現在のモデル画像: ${data.mdlimage}`;
-                    document.getElementById('patt-name').textContent = `現在のパターンファイル: ${data.patt}`;
-                    document.getElementById('mkimage-name').textContent = `現在のマーカー画像: ${data.mkimage}`;
+                    document.getElementById('mdlimage-name').textContent = `現在のモデル画像：${data.mdlimage}`;
+                    document.getElementById('patt-name').textContent = `現在のパターンファイル：${data.patt}`;
+                    document.getElementById('mkimage-name').textContent = `現在のマーカー画像：${data.mkimage}`;
                 })
                 .catch(error => {
                     console.error('エラー:', error);
                     alert('データを取得できませんでした。');
                 });
+        }
+
+        // adminnameがURLパラメータにある場合はローカルストレージに保存
+        if (adminname) {
+            localStorage.setItem('adminname', adminname);
+        } else {
+            // URLパラメータがない場合はローカルストレージから取得
+            adminname = localStorage.getItem('adminname');
+        }
+
+        // adminnameが存在する場合にページに表示
+        if (adminname) {
+            document.querySelector('header p').textContent = `ユーザー名: ${adminname}`;
         }
 
         document.getElementById('edit-form').addEventListener('submit', function (event) {
@@ -82,6 +103,8 @@
                 });
         });
     </script>
+    </main>
 </body>
+
 
 </html>
