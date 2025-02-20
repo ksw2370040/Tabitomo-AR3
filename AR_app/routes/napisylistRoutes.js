@@ -120,7 +120,7 @@ router.post('/edit', upload.single('napisyFile'), async (req, res) => {
         }
 
         // 新しいファイルに内容を保存
-        const newFilePath = path.join('C/home/ec2-user/Tabitomo-AR3/AR_app/public/Content/napisy', napisyFile);
+        const newFilePath = path.join('/home/ec2-user/Tabitomo-AR3/AR_app/public/Content/napisy', napisyFile);
         fs.writeFileSync(newFilePath, napisycontent, 'utf-8');
 
         // DB更新
